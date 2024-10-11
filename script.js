@@ -45,12 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         releases.forEach((release, index) => {
             const li = document.createElement('li');
-            li.innerHTML = `
-                <strong>${release.artistName} - ${release.trackTitle}</strong> 
-                <span>${release.releaseDate}</span>
-                <label>Artwork in GD: 
+            li.innerHTML = `<div>
+                <div><strong>${release.artistName} - ${release.trackTitle}</strong></div>
+                <div><span>${release.releaseDate}</span></div>
+                <div><label>Artwork in GD: 
                     <input type="checkbox" class="artwork-checkbox" data-index="${index}" ${release.artworkGD ? 'checked' : ''}>
-                </label>
+                </label></div>
+                </div>
                 <button class="delete" data-index="${index}">Live/Delete</button>
             `;
             releaseList.appendChild(li);
