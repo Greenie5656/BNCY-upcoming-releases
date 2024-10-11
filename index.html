@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNCY Upcoming Releases</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BNCY UPCOMING RELEASES</h1>
+        </header>
+        <section id="add-release">
+            <h2>Add New Release</h2>
+            <form id="release-form">
+                <input type="text" id="artist-name" placeholder="Artist Name" required>
+                <input type="text" id="track-title" placeholder="Track Title" required>
+                <input type="date" id="release-date" required>
+                <label for="artwork-gd">Artwork in GD</label>
+                <input type="checkbox" id="artwork-gd">
+                <button type="submit">Add Release</button>
+            </form>
+        </section>
+        <section id="release-list">
+            <h2>Upcoming Releases</h2>
+            <ul id="releases"></ul>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
