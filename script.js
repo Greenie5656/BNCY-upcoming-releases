@@ -17,12 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const trackTitle = document.getElementById('track-title').value;
         const releaseDate = document.getElementById('release-date').value;
 
-        // Create a new release object without the artwork checkbox
+        // Create a new release object
         const release = {
             artistName,
             trackTitle,
             releaseDate,
-            artworkGD: false // Initially set to false
+            artworkGD: false,
+            contractsSent: false // Add this new property
         };
 
         // Add release to releases array and save to local storage
@@ -51,17 +52,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 <label>Artwork in GD: 
                     <input type="checkbox" class="artwork-checkbox" data-index="${index}" ${release.artworkGD ? 'checked' : ''}>
                 </label>
+                <label>Contracts Sent: 
+                    <input type="checkbox" class="contracts-checkbox" data-index="${index}" ${release.contractsSent ? 'checked' : ''}>
+                </label>
                 <button class="delete" data-index="${index}">Live/Delete</button>
             `;
             releaseList.appendChild(li);
         });
     }
 
-    // Handle checkbox change (to update artwork status)
+    // Handle checkbox change (to update artwork and contracts status)
     releaseList.addEventListener('change', function(e) {
         if (e.target.classList.contains('artwork-checkbox')) {
             const index = e.target.getAttribute('data-index');
             releases[index].artworkGD = e.target.checked;
+            localStorage.setItem('releases', JSON.stringify(releases));
+        } else if (e.target.classList.contains('contracts-checkbox')) {
+            const index = e.target.getAttribute('data-index');
+            releases[index].contractsSent = e.target.checked;
             localStorage.setItem('releases', JSON.stringify(releases));
         }
     });
