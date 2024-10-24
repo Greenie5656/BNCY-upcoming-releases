@@ -9,25 +9,43 @@
 <body>
     <div class="container">
         <header>
-            <h1>BNCY UPCOMING RELEASES</h1>
+            <img src="/assets/images/BNCY-logo-color.png"><h1>UPCOMING RELEASES</h1>
         </header>
-        <section id="add-release">
-            <h2>Add New Release</h2>
-            <form id="release-form">
-                <input type="text" id="artist-name" placeholder="Artist Name" required>
-                <input type="text" id="track-title" placeholder="Track Title" required>
-                <input type="date" id="release-date" required>
-                <label for="artwork-gd">Artwork in GD</label>
-                <input type="checkbox" id="artwork-gd">
-                <label for="contractsSent">Contracts Sent</label>
-                <input type="checkbox" id="contractsSent">
-                <button type="submit">Add Release</button>
-            </form>
-        </section>
-        <section id="release-list">
-            <h2>Upcoming Releases</h2>
-            <ul id="releases"></ul>
-        </section>
+        <main>
+            <section id="add-release">
+                <h2>Add New Release</h2>
+                <form id="release-form">
+                    <label for="artist-name">
+                        <span>Artist Name</span>
+                        <input type="text" id="artist-name" name="artist-name" required>
+                    </label>
+                    <label for="track-title">
+                        <span>Track Title</span>
+                        <input type="text" id="track-title" name="track-title" required>
+                    </label>
+                    <label for="release-date">
+                        <span>Release Date</span>
+                        <input type="date" id="release-date" name="release-date" required>
+                    </label>
+                    <label for="artwork-gd">
+                        <span>Artwork in GD</span>
+                        <input type="checkbox" id="artwork-gd" name="artwork-gd">
+                    </label>
+                    <label for="contractsSent">
+                        <span>Artwork in GD</span>
+                        <input type="checkbox" id="contractsSent" name="contractsSent">
+                    </label>
+                    <button type="submit">Add Release</button>
+                </form>
+            </section>
+            <section id="release-list">
+                <h2>Upcoming Releases</h2>
+                <ul id="releases"></ul>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 BNCY</p>
+        </footer>
     </div>
     <script src="/assets/scripts/main.js"></script>
 </body>
