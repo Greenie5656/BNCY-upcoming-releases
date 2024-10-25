@@ -1,0 +1,213 @@
+/*------------------------------------*\
+* CSS Reset
+\*------------------------------------*/
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul:not([role='list']),
+ol:not([role='list']) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  margin-inline: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1, h2, h3, h4,
+button, input {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1, h2,
+h3, h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input, button,
+textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/*------------------------------------*\
+* Base Styles
+\*------------------------------------*/
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+section {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+
+  &:last-of-type {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+#add-release,
+#release-list {
+  h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+#release-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media screen and (min-width: 920px) {
+    flex-direction: row;
+  }
+
+  label {
+    display: block;
+
+    &:has(input[type="checkbox"]) {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+
+      @media screen and (min-width: 920px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    span {
+      margin-bottom: .25rem;
+      white-space: nowrap;
+    }
+  }
+
+  input[type="text"],
+  input[type="date"]{
+    width: 100%;
+    padding: .25rem;
+  }
+
+  span {
+    display: block;
+    &::after {
+      content: ":";
+    }
+  }
+
+  input[type="submit"] {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+}
+
+#release-list {
+  ul {
+    li {
+      margin-bottom: .5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      padding: 1rem;
+
+      @media screen and (min-width: 920px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  }
+}
