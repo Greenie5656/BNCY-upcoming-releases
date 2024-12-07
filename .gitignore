@@ -1,0 +1,21 @@
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Firebase config file 
+firebase-config.js
+firebase.config.js
+firebaseConfig.js
+
+# Build/dist directories
+dist/
+build/
+public/dist/
+
+# Local environment files
+.env
+.env.local
+.env.*.local

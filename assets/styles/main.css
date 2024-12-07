@@ -1,3 +1,4 @@
+
 /*------------------------------------*\
 * CSS Reset
 \*------------------------------------*/
@@ -84,11 +85,27 @@ input[type="checkbox"] {
 }
 
 /*------------------------------------*\
+* Font Imports
+\*------------------------------------*/
+
+@font-face {
+  font-family: 'GothamLight';
+  src: url('/assets/fonts/GOTHAM-LIGHT.OTF') format('opentype');
+}
+
+@font-face {
+  font-family: 'GothamBold';
+  src: url('/assets/fonts/GOTHAM-BOLD.OTF') format('opentype');
+}
+
+/*------------------------------------*\
 * Base Styles
 \*------------------------------------*/
 
 body {
-  font-family: sans-serif;
+  font-family: 'GothamLight', sans-serif;
+  background-color: #000000; /* Full black background */
+  color: #FFFFFF; /* White default text */
 }
 
 .container {
@@ -103,34 +120,34 @@ header {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: #333;
-  color: white;
+  background-color: #000000; /* Black header background */
+  color: #FFFFFF; /* White text */
   padding: 1rem;
+  font-family: 'GothamBold', sans-serif;
+  border-bottom: 4px solid #FF007F; /* Pink trim for separation */
 }
 
 main {
   flex: 1;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
   max-width: 920px;
   margin: 0 auto;
+  background-color: #FFFFFF; /* White main content area */
+  color: #000000; /* Black text for contrast */
+  border-radius: 0.5rem; /* Slightly rounded edges */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for elevation */
 }
 
 section {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
-
-  &:last-of-type {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border-bottom: 0;
-  }
+  border-bottom: 1px solid #CCCCCC; /* Light gray */
 }
 
 footer {
-  background-color: #333;
-  color: white;
+  background-color: #FF007F; /* Vibrant pink footer */
+  color: #FFFFFF;
   padding: 1rem;
 }
 
@@ -138,6 +155,7 @@ footer {
 #release-list {
   h2 {
     margin-bottom: 1rem;
+    color: #FF007F; /* Pink heading */
   }
 }
 
@@ -152,6 +170,7 @@ footer {
 
   label {
     display: block;
+    color: #000000; /* Black text */
 
     &:has(input[type="checkbox"]) {
       display: flex;
@@ -171,9 +190,13 @@ footer {
   }
 
   input[type="text"],
-  input[type="date"]{
+  input[type="date"] {
     width: 100%;
-    padding: .25rem;
+    padding: .5rem;
+    background-color: #F9F9F9; /* Light gray background for input fields */
+    color: #000000; /* Black text */
+    border: 1px solid #00FFFF; /* Cyan border */
+    border-radius: 0.25rem; /* Rounded edges */
   }
 
   span {
@@ -184,12 +207,17 @@ footer {
   }
 
   input[type="submit"] {
-    background-color: #333;
-    color: white;
+    background-color: #00FFFF; /* Cyan button */
+    color: #000000;
     padding: 0.5rem 1rem;
     border: 0;
     border-radius: 0.25rem;
     cursor: pointer;
+
+    &:hover {
+      background-color: #FF007F; /* Pink on hover */
+      color: #FFFFFF; /* White text on hover */
+    }
   }
 }
 
@@ -201,8 +229,10 @@ footer {
       flex-direction: column;
       gap: .5rem;
       margin-bottom: 1rem;
-      border: 1px solid #ccc;
+      border: 1px solid #CCCCCC;
       padding: 1rem;
+      background-color: #F9F9F9; /* Light gray for contrast */
+      color: #000000;
 
       @media screen and (min-width: 920px) {
         flex-direction: row;
@@ -210,4 +240,46 @@ footer {
       }
     }
   }
+}
+
+input:not([type="checkbox"]),
+textarea,
+select,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #F9F9F9;
+}
+
+input,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select,
+button[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #F9F9F9;
+}
+
+/* Target specific button styles */
+button[type="submit"] {
+  background-color: #00FFFF;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  appearance: checkbox;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
