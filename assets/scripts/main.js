@@ -37,15 +37,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         const trackTitle = document.getElementById('track-title').value;
         const releaseDate = document.getElementById('release-date').value;
 
-        const formCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-        const artworkCheckbox = formCheckboxes[0];
-        const contractsCheckbox = formCheckboxes[1];
+        // Get all checkboxes
+        const artworkCheckbox = document.getElementById('artwork-gd');
+        const trackGDCheckbox = document.getElementById('track-gd');
+        const contentCreatedCheckbox = document.getElementById('content-created');
+        const contractsCheckbox = document.getElementById('contractsSent');
 
         const release = {
             artistName,
             trackTitle,
             releaseDate,
             artworkGD: artworkCheckbox ? artworkCheckbox.checked : false,
+            trackGD: trackGDCheckbox ? trackGDCheckbox.checked : false,
+            contentCreated: contentCreatedCheckbox ? contentCreatedCheckbox.checked : false,
             contractsSent: contractsCheckbox ? contractsCheckbox.checked : false
         };
 
@@ -63,16 +67,47 @@ document.addEventListener('DOMContentLoaded', async function() {
         releaseList.innerHTML = '';
         releases.forEach((release) => {
             const li = document.createElement('li');
+            
+            // Format the release date (assuming format is YYYY-MM-DD)
+            let displayDate = release.releaseDate;
+            try {
+                const dateObj = new Date(release.releaseDate);
+                if (!isNaN(dateObj)) {
+                    displayDate = dateObj.toLocaleDateString('en-GB', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    }).replace(/\//g, '-');
+                }
+            } catch (e) {
+                console.error("Error formatting date", e);
+            }
+            
+            // Simplified HTML structure to match the screenshot
             li.innerHTML = `
-                <strong>${release.artistName} - ${release.trackTitle}</strong> 
-                <span>${release.releaseDate}</span>
-                <label>Artwork in GD: 
-                    <input type="checkbox" class="artwork-checkbox" data-id="${release.id}" ${release.artworkGD ? 'checked' : ''}>
-                </label>
-                <label>Contracts Sent: 
-                    <input type="checkbox" class="contracts-checkbox" data-id="${release.id}" ${release.contractsSent ? 'checked' : ''}>
-                </label>
+                <div class="release-title">
+                    <strong>${release.artistName} - ${release.trackTitle}</strong>
+                </div>
+                <span class="release-date">${displayDate}</span>
                 <button class="delete" data-id="${release.id}">Live/Delete</button>
+                <div class="release-checkboxes">
+                    <label class="${release.artworkGD ? 'checked' : ''}">
+                        <span>Artwork in GD</span>
+                        <input type="checkbox" class="artwork-checkbox" data-id="${release.id}" ${release.artworkGD ? 'checked' : ''}>
+                    </label>
+                    <label class="${release.trackGD ? 'checked' : ''}">
+                        <span>Track in GD</span>
+                        <input type="checkbox" class="track-gd-checkbox" data-id="${release.id}" ${release.trackGD ? 'checked' : ''}>
+                    </label>
+                    <label class="${release.contentCreated ? 'checked' : ''}">
+                        <span>Content Created</span>
+                        <input type="checkbox" class="content-created-checkbox" data-id="${release.id}" ${release.contentCreated ? 'checked' : ''}>
+                    </label>
+                    <label class="${release.contractsSent ? 'checked' : ''}">
+                        <span>Contracts Sent</span>
+                        <input type="checkbox" class="contracts-checkbox" data-id="${release.id}" ${release.contractsSent ? 'checked' : ''}>
+                    </label>
+                </div>
             `;
             releaseList.appendChild(li);
         });
@@ -80,10 +115,24 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Handle checkbox changes
     releaseList.addEventListener('change', async function(e) {
-        if (e.target.classList.contains('artwork-checkbox') || e.target.classList.contains('contracts-checkbox')) {
+        if (e.target.classList.contains('artwork-checkbox') || 
+            e.target.classList.contains('track-gd-checkbox') || 
+            e.target.classList.contains('content-created-checkbox') || 
+            e.target.classList.contains('contracts-checkbox')) {
+            
             const id = e.target.getAttribute('data-id');
-            const isArtwork = e.target.classList.contains('artwork-checkbox');
-            const field = isArtwork ? 'artworkGD' : 'contractsSent';
+            let field = '';
+            
+            // Determine which field to update
+            if (e.target.classList.contains('artwork-checkbox')) {
+                field = 'artworkGD';
+            } else if (e.target.classList.contains('track-gd-checkbox')) {
+                field = 'trackGD';
+            } else if (e.target.classList.contains('content-created-checkbox')) {
+                field = 'contentCreated';
+            } else if (e.target.classList.contains('contracts-checkbox')) {
+                field = 'contractsSent';
+            }
             
             try {
                 await db.collection("releases").doc(id).update({

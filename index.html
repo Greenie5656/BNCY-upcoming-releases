@@ -27,14 +27,27 @@
                         <span>Release Date</span>
                         <input type="date" id="release-date" name="release-date" required>
                     </label>
-                    <label for="artwork-gd">
-                        <span>Artwork in GD</span>
-                        <input type="checkbox" id="artwork-gd" name="artwork-gd">
-                    </label>
-                    <label for="contractsSent">
-                        <span>Contracts Sent</span>
-                        <input type="checkbox" id="contractsSent" name="contractsSent">
-                    </label>
+                    
+                    <!-- Wrap checkboxes in a div -->
+                    <div class="checkbox-group">
+                        <label for="artwork-gd">
+                            <input type="checkbox" id="artwork-gd" name="artwork-gd">
+                            <span>Artwork in GD</span>
+                        </label>
+                        <label for="track-gd">
+                            <input type="checkbox" id="track-gd" name="track-gd">
+                            <span>Track in GD</span>
+                        </label>
+                        <label for="content-created">
+                            <input type="checkbox" id="content-created" name="content-created">
+                            <span>Content Created</span>
+                        </label>
+                        <label for="contractsSent">
+                            <input type="checkbox" id="contractsSent" name="contractsSent">
+                            <span>Contracts Sent</span>
+                        </label>
+                    </div>
+                    
                     <button type="submit">Add Release</button>
                 </form>
             </section>
@@ -44,7 +57,7 @@
             </section>
         </main>
         <footer>
-            <p>&copy; 2024 BNCY</p>
+            <p>&copy; 2025 BNCY</p>
         </footer>
     </div>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
